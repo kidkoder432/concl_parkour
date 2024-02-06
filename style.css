@@ -7,13 +7,21 @@
     height: 100%;
     position: absolute;
     display: flex;
+    z-index: 1;
     justify-content: center;
     flex-direction: column;
 }
 
 .animate {
     animation-name: hide;
-    animation-duration: 2s;
+    animation-duration: 1.4s;
+    /* Preserve the effect of the animation at ending */
+    animation-fill-mode: forwards;
+}
+
+.blur {
+    animation-name: show;
+    animation-duration: 1.4s;
     /* Preserve the effect of the animation at ending */
     animation-fill-mode: forwards;
 }
@@ -27,6 +35,22 @@
 
 }
 
+@keyframes show {
+    to {
+        opacity: 100%;
+        backdrop-filter: blur(20px);
+        display: flex;
+    }
+
+}
+
+#pause {
+    opacity: 1%;
+    backdrop-filter: blur(1px);
+
+}
+
+
 #prologue {
     display: none;
 }
@@ -34,7 +58,7 @@
 .game {
     top: 0;
     left: 0;
-
+    padding: 0;
     position: absolute;
     height: 100%;
     width: 100%;
@@ -44,11 +68,13 @@
 body {
     display: flex;
     justify-content: center;
-    overflow-y: scroll;
+    overflow-y: clip;
+    padding: 0;
+    height: 100vh;
 
 }
 
-#start, #help {
+button {
     color: white;
     font-weight: bold;
     background-color: transparent;

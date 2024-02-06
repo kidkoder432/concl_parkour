@@ -1,13 +1,15 @@
 const canvas = document.getElementById("canvas");
 let ctx = canvas.getContext("2d");
 
-
+let paused = false;
 let mouseX, mouseY;
 addEventListener("mousemove", function (e) {
     mouseX = e.x * devicePixelRatio;
     mouseY = e.y * devicePixelRatio;
 
 })
+
+
 
 let boxes = [];
 let jump;
@@ -17,6 +19,16 @@ addEventListener("keydown", function (e) {
         vel = 20
         jump = false
     }
+
+    if (e.key === "Escape") {
+        if (paused) {
+            unpause()
+        }
+        else {
+            pause();
+        }
+    }
+
 })
 
 
@@ -36,7 +48,7 @@ let y = canvas.height * .5
 boxes.push(new ConclusionBox(ctx, canvas.width / 2, canvas.height * .4, randomString(20)))
 
 function draw() {
-
+    if (paused) return;
     scale = devicePixelRatio
     canvas.width = window.innerWidth * scale
     canvas.height = window.innerHeight * scale
