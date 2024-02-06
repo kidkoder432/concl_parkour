@@ -1,6 +1,8 @@
 const canvas = document.getElementById("canvas");
 let ctx = canvas.getContext("2d");
 
+const FPS = 200
+
 let paused = false;
 let mouseX, mouseY;
 addEventListener("mousemove", function (e) {
@@ -16,7 +18,7 @@ let jump;
 
 addEventListener("keydown", function (e) {
     if (e.key === " ") {
-        vel = 20
+        vel = 20 / (FPS/100)
         jump = false
     }
 
@@ -33,7 +35,7 @@ addEventListener("keydown", function (e) {
 
 
 let vel = 0
-let accel = 9.81
+let accel = 9.81 * (100/FPS)
 
 
 let scale = devicePixelRatio
@@ -65,11 +67,11 @@ function draw() {
     }
 
 
-    vel -= accel / 10;
+    vel -= (accel / 10) / (FPS/100);
 
 
     for (let box of boxes) {
-        box.x -= 9
+        box.x -= 9 / (FPS/100)
         box.draw()
 
         if (box.x < -box.w) {
@@ -109,12 +111,4 @@ function draw() {
 
 draw()
 
-function start() {
-    e = document.getElementById("intro")
-    e.classList.add("animate")
-    e.addEventListener("animationend", () => {
-        setInterval(draw, 10)
-    })
 
-
-}

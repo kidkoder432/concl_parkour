@@ -15,7 +15,7 @@ function start() {
     e = document.getElementById("intro")
     e.classList.add("animate")
     e.addEventListener("animationend", () => {
-        setInterval(draw, 10)
+        setInterval(draw, Math.round(1000/FPS))
     })
 
 }
